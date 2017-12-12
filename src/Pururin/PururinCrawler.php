@@ -30,6 +30,16 @@ class PururinCrawler
 		if (! isset($data['save_directory'], $data['manga_url'])) {
 			throw new PururinException("Invalid construct data", 1);
 		}
+		if (substr($data['manga_url'], 0, 26) !== "http://pururin.us/gallery/") {
+			throw new PururinException("Invalid gallery url, the gallery url must be start with \"http://pururin.us/gallery/\"", 1);
+		}
+
+		$a = explode("http://pururin.us/gallery/", $data['manga_url'], 2);
+		if (! isset($a[1])) {
+			throw new PururinException("Invalid gallery url", 1);
+		}
+		$a = explode("/", $a[1]);
+		$this->result['id'] = (int) $a[0];
 		is_dir($data['save_directory']) or mkdir($data['save_directory']);
 		$this->data = $data;
 	}
@@ -46,11 +56,14 @@ class PururinCrawler
 	{
 		switch ($context) {
 			case 'cover':
-					var_dump($data);
+					$this->result['info'] = $data;
 				break;
 			
+			case 'content':
+
+				break;
 			default:
-				# code...
+				throw new PururinException("Unknown context", 1);
 				break;
 		}
 	}
