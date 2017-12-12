@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "ammarfaizi2/php-curl": "^0.0.1"
+    },
     "autoload": {
         "psr-4": {
             "Pururin\\": "src/Pururin/"
