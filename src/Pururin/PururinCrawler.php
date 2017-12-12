@@ -39,6 +39,11 @@ class PururinCrawler
 	private $tmpContainer = [];
 
 	/**
+	 * @var int
+	 */
+	private $offset = 1;
+
+	/**
 	 * @throws \Pururin\Exceptions\PururinException
 	 * @param $data array
 	 */
@@ -66,6 +71,9 @@ class PururinCrawler
 			throw new PururinException("Save directory is not writeable", 1);	
 		}
 		$this->url = $data['manga_url'];
+		if (isset($data['offset'])) {
+			$this->offset = $data['offset'];
+		}
 	}
 
 	/**
@@ -137,6 +145,7 @@ class PururinCrawler
 		$get->build();
 		$this->buildContext($this->result = $get->get(), "cover");
 		$this->tmpContainer['content_crawler'] = new Content($this);
+		$this->tmpContainer['content_crawler']->setOffsetPoint($this->offset);
 	}
 
 	/**

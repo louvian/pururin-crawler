@@ -39,7 +39,9 @@ class Content extends Crawler
 			);
 			$this->binary = $ch->exec();
 			if ($ch->errno()) {
-				throw new PururinException($ch->error(), 1);
+				$ex = new PururinException($ch->error(), 1);
+				$ex->pointer($this->pointer);
+				throw $ex;
 			}
 			$info = $ch->info();
 			if ($info['http_code'] !== 200) {
@@ -48,6 +50,11 @@ class Content extends Crawler
 			return true;
 		}
 		return false;
+	}
+
+	public function setOffsetPoint($offset)
+	{
+		$this->pointer = $offset;
 	}
 
 	public function build()
