@@ -130,11 +130,12 @@ class PururinCrawler
 	private function getContent()
 	{
 		$action = $this->tmpContainer['content_crawler']->action();
-		$this->tmpContainer['content_crawler']->build();
-		$this->buildContext(
-			$this->tmpContainer['content_crawler']->get(), 
-			"content"
-		);
+		if ($action) {
+			$this->buildContext(
+				$this->tmpContainer['content_crawler']->get(), 
+				"content"
+			);
+		}
 		return $action;
 	}
 }

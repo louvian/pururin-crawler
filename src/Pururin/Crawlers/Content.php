@@ -16,7 +16,7 @@ class Content extends Crawler
 	/**
 	 * @var int
 	 */
-	private $pointer = 0;
+	private $pointer = 1;
 
 	/**
 	 * @var string
@@ -28,7 +28,7 @@ class Content extends Crawler
 	 */
 	public function action()
 	{
-		if (! isset($this->ins->result['info']['Pages']) || $this->ins->result['info']['Pages'] <= $this->pointer) {
+		if (! isset($this->ins->result['info']['Pages']) || $this->pointer <= $this->ins->result['info']['Pages']) {
 			$ch = new Curl("http://pururin.us/assets/images/data/".$this->ins->id."/".$this->pointer.".jpg");
 			$ch->setOpt(
 				[
@@ -38,6 +38,10 @@ class Content extends Crawler
 			$this->binary = $ch->exec();
 			if ($ch->errno()) {
 				throw new PururinException($ch->error(), 1);
+			}
+			$info = $ch->info();
+			if ($info['http_code'] !== 200) {
+				return false;
 			}
 			return true;
 		}
