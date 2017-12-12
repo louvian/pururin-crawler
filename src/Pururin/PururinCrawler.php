@@ -101,7 +101,6 @@ class PururinCrawler
 	{
 		switch ($context) {
 			case 'cover':
-			var_dump($data['info']);
 				$this->result['info'] = $data['info'];
 				$handle = fopen($this->saveDir."/info.txt", "w");
 				flock($handle, LOCK_EX);
