@@ -32,6 +32,11 @@ class PururinCrawler
 	private $result = [];
 
 	/**
+	 * @var array
+	 */
+	private $tmpContainer = [];
+
+	/**
 	 * @throws \Pururin\Exceptions\PururinException
 	 * @param $data array
 	 */
@@ -114,5 +119,20 @@ class PururinCrawler
 		$get->action();
 		$get->build();
 		$this->buildContext($get->get(), "cover");
+		$this->tmpContainer['content_crawler'] = new Content($this);
+	}
+
+	/**
+	 * Get content
+	 */
+	private function getContent()
+	{
+		$action = $this->tmpContainer['content_crawler']->action();
+		$this->tmpContainer['content_crawler']->build();
+		$this->buildContext(
+			$this->tmpContainer['content_crawler']->get(), 
+			"content"
+		);
+		return $action;
 	}
 }
