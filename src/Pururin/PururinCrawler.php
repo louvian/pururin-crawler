@@ -2,6 +2,8 @@
 
 namespace Pururin;
 
+use Pururin\Crawlers\Cover;
+
 /**
  * @author Louvian Lyndal <louvianlyndal@gmail.com>
  * @license MIT
