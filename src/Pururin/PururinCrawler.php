@@ -12,6 +12,11 @@ class PururinCrawler
 {
 
 	/**
+	 * @var int
+	 */
+	private $id;
+
+	/**
 	 * @var string
 	 */
 	public $url;
@@ -43,7 +48,7 @@ class PururinCrawler
 			throw new PururinException("Invalid gallery url", 1);
 		}
 		$a = explode("/", $a[1]);
-		$this->result['id'] = (int) $a[0];
+		$this->id = (int) $a[0];
 		is_dir($data['save_directory']) or mkdir($data['save_directory']);
 		$this->saveDir = $data['save_directory']."/".$this->result['id'];
 		is_dir($this->saveDir) or mkdir($this->saveDir);
@@ -62,7 +67,8 @@ class PururinCrawler
 	public function run()
 	{
 		$this->getCover();
-		$this->getContent();
+		while ($content = $this->getContent()) {
+		}
 	}
 
 	/**
@@ -78,10 +84,20 @@ class PururinCrawler
 		switch ($context) {
 			case 'cover':
 				$this->result['info'] = $data;
+				$handle = fopen($this->saveDir."/info.txt", "w");
+				flock($handle, LOCK_EX);
+				fwrite($handle, json_encode($data, JSON_UNESCAPED_SLASHES));
+				fclose($handle);
 				break;
 			
 			case 'content':
-
+				if (! isset($data['number'], $data['binary'])) {
+					throw new PururinException("Invalid content data", 1);
+				}
+				$handle = fopen($this->saveDir."/".$data['number'].".jpg", "w");
+				flock($handle, LOCK_EX);
+				fwrite($handle, $data['binary']);
+				fclose($handle);
 				break;
 			default:
 				throw new PururinException("Unknown context", 1);
