@@ -28,7 +28,7 @@ class Content extends Crawler
 	 */
 	public function action()
 	{
-		if (false /*&& ! isset($this->ins->result['info']['Pages']) || $this->pointer <= $this->ins->result['info']['Pages']*/) {
+		if (! isset($this->ins->result['info']['Pages']) || $this->pointer <= $this->ins->result['info']['Pages']) {
 			$ch = new Curl("http://pururin.us/assets/images/data/".$this->ins->id."/".$this->pointer.".jpg");
 			$ch->setOpt(
 				[

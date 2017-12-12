@@ -83,8 +83,8 @@ class PururinCrawler
 	{
 		return [
 			"id"    => $this->id,
-			"title" => $this->result['title'],
-			"info"  => json_encode($this->result, JSON_UNESCAPED_SLASHES),
+			"title" => $this->result['info']['title'],
+			"info"  => json_encode($this->result['info'], JSON_UNESCAPED_SLASHES),
 			"origin_link" => $this->url
 		];
 	}
@@ -101,6 +101,7 @@ class PururinCrawler
 	{
 		switch ($context) {
 			case 'cover':
+			var_dump($data['info']);
 				$this->result['info'] = $data['info'];
 				$handle = fopen($this->saveDir."/info.txt", "w");
 				flock($handle, LOCK_EX);
