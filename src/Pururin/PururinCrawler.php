@@ -3,6 +3,8 @@
 namespace Pururin;
 
 use Pururin\Crawlers\Cover;
+use Pururin\Crawlers\Content;
+use Pururin\Exceptions\PururinException;
 
 /**
  * @author Louvian Lyndal <louvianlyndal@gmail.com>
@@ -55,7 +57,7 @@ class PururinCrawler
 		$a = explode("/", $a[1]);
 		$this->id = (int) $a[0];
 		is_dir($data['save_directory']) or mkdir($data['save_directory']);
-		$this->saveDir = $data['save_directory']."/".$this->result['id'];
+		$this->saveDir = $data['save_directory']."/".$this->id;
 		is_dir($this->saveDir) or mkdir($this->saveDir);
 		if (! is_dir($this->saveDir)) {
 			throw new PururinException("Cannot create directory", 1);
