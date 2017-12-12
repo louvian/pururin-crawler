@@ -14,7 +14,7 @@ class PururinCrawler
 	/**
 	 * @var array
 	 */
-	private $data = [];
+	public $data = [];
 
 	/**
 	 * @var array
@@ -46,7 +46,7 @@ class PururinCrawler
 	{
 		switch ($context) {
 			case 'cover':
-				
+					var_dump($data);
 				break;
 			
 			default:

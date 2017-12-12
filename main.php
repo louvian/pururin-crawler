@@ -3,7 +3,7 @@
 require __DIR__ . "/vendor/autoload.php";
 
 $saveDir  = __DIR__ . "/data";
-$mangaUrl = "http://pururin.us/gallery/35227";
+$mangaUrl = "http://pururin.us/gallery/35239/lily-complex";
 
 if (! is_dir($saveDir)) {
 	mkdir($saveDir);

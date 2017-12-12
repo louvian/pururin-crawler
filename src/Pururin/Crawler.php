@@ -10,7 +10,7 @@ abstract class Crawler
 	/**
 	 * @var \Pururin\PururinCrawler
 	 */
-	private $ins;
+	protected $ins;
 
 	/**
 	 * @param \Pururin\PururinCrawler
