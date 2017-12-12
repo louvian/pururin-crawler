@@ -8,7 +8,7 @@ class Validator
 	{
 		$this->url = $url;
 		$this->totalPage = $totalPage;
-		$i = 0;
+		$i = 1;
 		while (file_exists($path."/".$i.".jpg")) {
 			$this->offset = $i++;
 		}
