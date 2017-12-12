@@ -16,7 +16,7 @@ class PururinCrawler
 	/**
 	 * @var int
 	 */
-	private $id;
+	public $id;
 
 	/**
 	 * @var string
