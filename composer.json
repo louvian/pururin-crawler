@@ -1,7 +1,7 @@
 {
     "name": "louvian/pururin-crawler",
     "description": "Pururin Crawler",
-    "type": "library",
+    "type": "project",
     "license": "MIT",
     "authors": [
         {
