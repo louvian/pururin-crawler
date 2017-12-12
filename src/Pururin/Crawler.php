@@ -2,6 +2,8 @@
 
 namespace Pururin;
 
+use Pururin\PururinCrawler;
+
 abstract class Crawler
 {
 
