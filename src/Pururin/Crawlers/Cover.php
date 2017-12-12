@@ -17,6 +17,11 @@ class Cover extends Crawler
 	/**
 	 * @var string
 	 */
+	private $binary;
+
+	/**
+	 * @var string
+	 */
 	private $raw;
 
 	/**
@@ -100,6 +105,14 @@ class Cover extends Crawler
 				throw new PururinException("Error Building Cover Info", 1);
 			}
 		}
+		$ch = new Curl("http://pururin.us/assets/images/data/".$this->ins->id."/cover.jpg");
+		$ch->setOpt(
+			[
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_REFERER => $this->ins->url
+			]
+		);
+		$this->binary = $ch->exec();
 		return true;
 	}
 
@@ -110,6 +123,9 @@ class Cover extends Crawler
 	 */
 	public function get()
 	{
-		return $this->info;
+		return [
+			"info" => $this->info,
+			"binary" => $this->binary
+		];
 	}
 }

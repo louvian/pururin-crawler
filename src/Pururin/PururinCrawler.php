@@ -31,7 +31,7 @@ class PururinCrawler
 	/**
 	 * @var array
 	 */
-	private $result = [];
+	public $result = [];
 
 	/**
 	 * @var array
@@ -76,6 +76,17 @@ class PururinCrawler
 		$this->getCover();
 		while ($content = $this->getContent()) {
 		}
+		return true;
+	}
+
+	public function getResult()
+	{
+		return [
+			"id"    => $this->id,
+			"title" => $this->result['title'],
+			"info"  => json_encode($this->result, JSON_UNESCAPED_SLASHES),
+			"origin_link" => $this->url
+		];
 	}
 
 	/**
@@ -90,10 +101,14 @@ class PururinCrawler
 	{
 		switch ($context) {
 			case 'cover':
-				$this->result['info'] = $data;
+				$this->result['info'] = $data['info'];
 				$handle = fopen($this->saveDir."/info.txt", "w");
 				flock($handle, LOCK_EX);
-				fwrite($handle, json_encode($data, JSON_UNESCAPED_SLASHES));
+				fwrite($handle, json_encode($data['info'], JSON_UNESCAPED_SLASHES));
+				fclose($handle);
+				$handle = fopen($this->saveDir."/cover.jpg", "w");
+				flock($handle, LOCK_EX);
+				fwrite($handle, $data['binary']);
 				fclose($handle);
 				break;
 			
@@ -120,7 +135,7 @@ class PururinCrawler
 		$get = new Cover($this);
 		$get->action();
 		$get->build();
-		$this->buildContext($get->get(), "cover");
+		$this->buildContext($this->result = $get->get(), "cover");
 		$this->tmpContainer['content_crawler'] = new Content($this);
 	}
 

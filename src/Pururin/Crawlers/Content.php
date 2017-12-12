@@ -28,13 +28,13 @@ class Content extends Crawler
 	 */
 	public function action()
 	{
-		if (! isset($this->ins->result['info']['Pages']) || $this->pointer <= $this->ins->result['info']['Pages']) {
+		if (false /*&& ! isset($this->ins->result['info']['Pages']) || $this->pointer <= $this->ins->result['info']['Pages']*/) {
 			$ch = new Curl("http://pururin.us/assets/images/data/".$this->ins->id."/".$this->pointer.".jpg");
 			$ch->setOpt(
 				[
 					CURLOPT_REFERER => $this->ins->url,
-					CURLOPT_CONNECTTIMEOUT => 300,
-					CURLOPT_TIMEOUT => 300
+					CURLOPT_CONNECTTIMEOUT => 1000,
+					CURLOPT_TIMEOUT => 1000
 				]
 			);
 			$this->binary = $ch->exec();
