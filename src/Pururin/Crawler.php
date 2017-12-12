@@ -13,7 +13,7 @@ abstract class Crawler
 	/**
 	 * @param \Pururin\PururinCrawler
 	 */
-	public function __construct(PururinCrawler $mainInstance)
+	final public function __construct(PururinCrawler $mainInstance)
 	{
 		$this->ins = $mainInstance;
 	}
