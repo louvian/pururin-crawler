@@ -62,4 +62,3 @@ class Content extends Crawler
 		];
 	}
 }
-// http://pururin.us/assets/images/data/
