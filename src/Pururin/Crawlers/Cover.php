@@ -26,14 +26,29 @@ class Cover extends Crawler
 
 	/**
 	 * Action.
+	 * @throws \Pururin\Exceptions\PururinException
+	 * @return bool
 	 */
 	public function action()
 	{
-		$this->raw = file_get_contents("a.tmp");
+		$ch = new Curl($this->ins->data['manga_url']);
+		$ch->setOpt(
+			[
+				CURLOPT_FOLLOWLOCATION => true
+			]
+		);
+		$out = $ch->exec();
+		if ($ch->errno()) {
+			throw new PururinException($ch->error(), 1);
+		}
+		$this->raw = $out;
+		return true;
 	}
 
 	/**
 	 * Build cover information.
+	 * @throws \Pururin\Exceptions\PururinException
+	 * @return bool
 	 */
 	public function build()
 	{
@@ -85,6 +100,7 @@ class Cover extends Crawler
 				throw new PururinException("Error Processing Request", 1);
 			}
 		}
+		return true;
 	}
 
 	/**
