@@ -6,6 +6,11 @@ use Curl\Curl;
 use Pururin\Crawler;
 use Pururin\Exceptions\PururinException;
 
+/**
+ * @author Louvian Lyndal <louvianlyndal@gmail.com>
+ * @license MIT
+ * @package Pururin\Crawlers
+ */
 class Cover extends Crawler
 {
 
