@@ -32,7 +32,9 @@ class Content extends Crawler
 			$ch = new Curl("http://pururin.us/assets/images/data/".$this->ins->id."/".$this->pointer.".jpg");
 			$ch->setOpt(
 				[
-					CURLOPT_REFERER => $this->ins->url
+					CURLOPT_REFERER => $this->ins->url,
+					CURLOPT_CONNECTTIMEOUT => 300,
+					CURLOPT_TIMEOUT => 300
 				]
 			);
 			$this->binary = $ch->exec();
