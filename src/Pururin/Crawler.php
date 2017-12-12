@@ -19,6 +19,15 @@ abstract class Crawler
 	}
 
 	/**
+	 * @param string $str
+	 * @return string
+	 */
+	protected static function e($str)
+	{
+		return trim(html_entity_decode($str, ENT_QUOTES, 'UTF-8'));
+	}
+
+	/**
 	 * @return bool
 	 */
 	abstract public function action();
