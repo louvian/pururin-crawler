@@ -31,7 +31,7 @@ class Cover extends Crawler
 	 */
 	public function action()
 	{
-		$ch = new Curl($this->ins->data['manga_url']);
+		$ch = new Curl($this->ins->url);
 		$ch->setOpt(
 			[
 				CURLOPT_FOLLOWLOCATION => true
