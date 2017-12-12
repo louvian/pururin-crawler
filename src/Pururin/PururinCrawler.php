@@ -27,6 +27,10 @@ class PururinCrawler
 	 */
 	public function __construct($data)
 	{
+		if (! isset($data['save_directory'], $data['manga_url'])) {
+			throw new PururinException("Invalid construct data", 1);
+		}
+		is_dir($data['save_directory']) or mkdir($data['save_directory']);
 		$this->data = $data;
 	}
 

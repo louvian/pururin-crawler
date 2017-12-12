@@ -97,7 +97,7 @@ class Cover extends Crawler
 					}
 				}
 			} else {
-				throw new PururinException("Error Processing Request", 1);
+				throw new PururinException("Error Building Cover Info", 1);
 			}
 		}
 		return true;
